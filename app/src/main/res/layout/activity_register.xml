@@ -38,6 +38,8 @@
         app:hintTextColor="@color/black"
         app:boxStrokeColor="@color/black"
         app:passwordToggleEnabled="true"
+        app:errorTextColor="@color/black"
+        app:boxStrokeErrorColor="#FF1000"
         android:layout_marginTop="20dp"
         style="@style/ThemeOverlay.Material3.MaterialTimePicker.Display.TextInputEditText"
         app:layout_constraintStart_toStartOf="parent"

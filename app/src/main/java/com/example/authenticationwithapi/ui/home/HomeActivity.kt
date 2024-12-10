@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.authenticationwithapi.R
 import com.example.authenticationwithapi.databinding.ActivityHomeBinding
+import com.example.authenticationwithapi.util.validateFields
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,6 +18,8 @@ class HomeActivity : AppCompatActivity() {
         binding=ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val token = intent.getStringExtra("USER_TOKEN")
-        binding.userToken.text=token
+       val tokan= binding.userToken
+        validateFields(this, tokan to "sdnasjdnb")
+
     }
 }

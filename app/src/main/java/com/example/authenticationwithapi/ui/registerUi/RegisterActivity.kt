@@ -9,9 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.authenticationwithapi.databinding.ActivityRegisterBinding
 import com.example.authenticationwithapi.ui.home.HomeActivity
 import com.example.authenticationwithapi.ui.loginUI.LoginActivity
-import com.example.authenticationwithapi.ui.viewmodel.LoginViewModel
 import com.example.authenticationwithapi.ui.viewmodel.RegistererViewModel
-import com.example.authenticationwithapi.util.isPasswordMatch
+import com.example.authenticationwithapi.util.validateFields
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +27,7 @@ class RegisterActivity : AppCompatActivity() {
             Register()
         }
         binding.login.setOnClickListener {
-            startActivity(Intent(this@RegisterActivity,LoginActivity::class.java))
+            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
         }
 
         lifecycleScope.launchWhenStarted {
@@ -54,29 +53,15 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun Register() {
-        val email = binding.email.text.toString()
-        val password = binding.password.text.toString()
-        val confirmPassword = binding.confirmPassword.text.toString()
-
-        if (email.isEmpty()) {
-            binding.userEmail.error = "Email cannot be empty"
-            return
-        }
-
-        if (password.isEmpty()) {
-            binding.userPassword.error = "Password cannot be empty"
-            return
-        }
-
-        if (confirmPassword.isEmpty()) {
-            binding.confirmPassword.error = "Confirm Password cannot be empty"
-            return
-        }
-
-        if (isPasswordMatch(password, confirmPassword)) {
-            viewModel.register(email, password)
-        } else {
-            binding.confirmPassword.error = "Passwords do not match"
-        }
+        val email = binding.email
+        val password = binding.password
+        val confirmPassword = binding.confirmPassword
+        if (validateFields(this,
+                email to " Please enter Email",
+                password to "Please enter password",
+                confirmPassword to "Please confirm password",
+                passwordPair =Triple(password ,
+                    confirmPassword ,"Passwords do not match")))
+        { viewModel.register(email.text.toString(), password.text.toString()) }
     }
 }

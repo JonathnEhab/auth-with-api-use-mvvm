@@ -18,6 +18,7 @@
         app:cursorColor="@color/black"
         app:hintTextColor="@color/black"
         app:boxStrokeColor="@color/black"
+        app:errorTextColor="@color/black"
         style="@style/ThemeOverlay.Material3.MaterialTimePicker.Display.TextInputEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -40,6 +41,7 @@
         app:hintTextColor="@color/black"
         app:boxStrokeColor="@color/black"
         android:layout_marginTop="20dp"
+        app:errorTextColor="@color/black"
         style="@style/ThemeOverlay.Material3.MaterialTimePicker.Display.TextInputEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

@@ -2,7 +2,6 @@ package com.example.authenticationwithapi.ui.loginUI
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +10,7 @@ import com.example.authenticationwithapi.databinding.ActivityLoginBinding
 import com.example.authenticationwithapi.ui.home.HomeActivity
 import com.example.authenticationwithapi.ui.registerUi.RegisterActivity
 import com.example.authenticationwithapi.ui.viewmodel.LoginViewModel
+import com.example.authenticationwithapi.util.validateFields
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,7 +26,6 @@ class LoginActivity : AppCompatActivity() {
         binding.login.setOnClickListener {
             Login()
         }
-
         lifecycleScope.launchWhenStarted {
             viewModel.loginResult.collect { result ->
                 result.onSuccess {
@@ -37,7 +36,6 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
-
         binding.register.setOnClickListener {
             goToRegister()
         }
@@ -54,21 +52,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun Login() {
-        val email = binding.email.text.toString()
-        val password = binding.password.text.toString()
+        val email = binding.email
+        val password = binding.password
 
-        if (email.isEmpty()) {
-            binding.userEmail.error = "Please enter Email"
-            return
-        }
-
-        if (password.isEmpty()) {
-            binding.userPassword.error = "Please enter password"
-            return
-        }
-
-        if (email.isNotEmpty() && password.isNotEmpty()) {
-            viewModel.login(email, password)  // تأكد من أن هذه الدالة موجودة في الـ ViewModel
+        if (validateFields(this,email to " Please enter Email",
+                password to "Please enter password" )) {
+            viewModel.login(email.text.toString(), password.text.toString())
         }
     }
 }
