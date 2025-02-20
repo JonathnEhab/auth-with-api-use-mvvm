@@ -18,8 +18,8 @@ class HomeActivity : AppCompatActivity() {
         binding=ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val token = intent.getStringExtra("USER_TOKEN")
-       val tokan= binding.userToken
-        validateFields(this, tokan to "sdnasjdnb")
+        binding.userToken.text= token
+
 
     }
 }
